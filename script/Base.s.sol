@@ -34,7 +34,9 @@ abstract contract BaseScript is Script {
     }
 
     modifier broadcast() {
+        // uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         vm.startBroadcast(broadcaster);
+        // vm.startBroadcast(deployerPrivateKey);
         _;
         vm.stopBroadcast();
     }

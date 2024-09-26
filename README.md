@@ -1,63 +1,24 @@
-# Foundry Template [![Open in Gitpod][gitpod-badge]][gitpod] [![Github Actions][gha-badge]][gha] [![Foundry][foundry-badge]][foundry] [![License: MIT][license-badge]][license]
+# Felend [![License: MIT][license-badge]][license]
 
-[gitpod]: https://gitpod.io/#https://github.com/fhenixprotocol/fhenix-foundry-template
-[gitpod-badge]: https://img.shields.io/badge/Gitpod-Open%20in%20Gitpod-FFB45B?logo=gitpod
-[gha]: https://github.com/fhenixprotocol/fhenix-foundry-template/actions
-[gha-badge]: https://github.com/fhenixprotocol/fhenix-foundry-template/actions/workflows/ci.yml/badge.svg
-[foundry]: https://getfoundry.sh/
-[foundry-badge]: https://img.shields.io/badge/Built%20with-Foundry-FFDB1C.svg
 [license]: https://opensource.org/licenses/MIT
 [license-badge]: https://img.shields.io/badge/License-MIT-blue.svg
 
-Fhenix provides a Foundry-based template for developing Solidity smart contracts and includes sensible defaults. Links
-are provided to specific topics for further exploration.
+Felend is Fully Encrypted Lending Protocol based on [Fhenix L2 Network](https://fhenix.io).
 
 ## What's Inside
 
-- [Forge](https://github.com/foundry-rs/foundry/blob/master/forge): Tools to compile, test, fuzz, format, and deploy
-  smart contracts.
-- [Forge Std](https://github.com/foundry-rs/forge-std): A collection of helpful contracts and utilities for testing.
-- [Prettier](https://github.com/prettier/prettier): A code formatter for non-Solidity files.
-- [Solhint](https://github.com/protofire/solhint): A linter for Solidity code.
-- [PermissionHelper.sol](./util/PermissionHelper.sol): Utilities for managing permissions related to FHE operations.
-- [FheHelper.sol](./util/FheHelper.sol): Utilities for simulating FHE operations.
-
 ## Getting Started
 
-To create a new repository using this template, click the
-[`Use this template`](https://github.com/fhenixprotocol/fhenix-foundry-template/generate) button at the top of the page.
-Alternatively, install the template manually as follows:
+Install dependencies
 
 ```sh
-$ mkdir my-project
-$ cd my-project
-$ forge init --template fhenixprotocol/fhenix-foundry-template
 $ bun install # install Solhint, Prettier, and other Node.js deps
 ```
 
-If this is your first time using Foundry, refer to the
-[installation](https://github.com/foundry-rs/foundry#installation) instructions for guidance.
-
 ## Features
 
-- Simulated FHE Operations: All FHE operations, including encryption, decryption, and encrypted data handling, are
-  simulated to replicate their behavior in a network environment. This approach facilitates seamless development and
-  testing without requiring a fully operational FHE network.
-- Permissions: The template includes utilities (PermissionHelper.sol) for creating permissions related to FHE
-  operations. These utilities enable users to test and verify that contracts correctly implement access-controlled
-  actions, such as viewing balances of encrypted tokens. For more about permissions, see the [Fhenix Documentation] https://docs.fhenix.zone/docs/devdocs/Writing%20Smart%20Contracts/Permissions)
-  section.
-
-## Installing Dependencies
-
-Follow these steps to install dependencies:
-
-1. Install the dependency using your preferred package manager, for example: `bun install dependency-name`
-   - If installing from Github, use: `bun install github:username/repo-name`
-2. Add a remapping for the dependency in [remappings.txt](./remappings.txt), for example:
-   `dependency-name=node_modules/dependency-name`
-
-Note that OpenZeppelin Contracts is pre-installed as an example.
+- [] Encrypt
+- [] 
 
 ## Writing Tests
 
