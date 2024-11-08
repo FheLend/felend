@@ -76,7 +76,7 @@ contract LendingPool is ReentrancyGuard, VersionedInitializable {
     event Borrow(
         address indexed _reserve,
         address indexed _user,
-        uint256 _amount,
+        euint128 _amount,
         uint256 _borrowRateMode,
         uint256 _borrowRate,
         uint256 _originationFee,
@@ -323,8 +323,6 @@ contract LendingPool is ReentrancyGuard, VersionedInitializable {
     {
 
         uint256 currentAvailableLiquidity = core.getReserveAvailableLiquidity(_reserve);
-        // euint32 redeemAmount = FHE.asEuint32(_encryptedAmount);
-        // uint256 _amount = FHE.decrypt(redeemAmount); // TODO: not decrypt
         require(
             currentAvailableLiquidity >= _amount,
             "There is not enough liquidity available to redeem"
@@ -399,7 +397,7 @@ contract LendingPool is ReentrancyGuard, VersionedInitializable {
         vars.availableLiquidity = core.getReserveAvailableLiquidity(_reserve);
 
         euint128 borrowAmount = FHE.asEuint128(_encryptedAmount);
-        uint256 _amount = FHE.decrypt(borrowAmount); // TODO: remove decrypt
+        uint256 _amount = FHE.decrypt(borrowAmount);
 
         require(
             vars.availableLiquidity >= _amount,
@@ -485,7 +483,7 @@ contract LendingPool is ReentrancyGuard, VersionedInitializable {
         emit Borrow(
             _reserve,
             msg.sender,
-            _amount,
+            borrowAmount,
             _interestRateMode,
             vars.finalUserBorrowRate,
             vars.borrowFee,

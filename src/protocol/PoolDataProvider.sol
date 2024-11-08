@@ -10,7 +10,7 @@ import "../interfaces/IPriceOracleGetter.sol";
 import "../interfaces/IFeeProvider.sol";
 import "../tokenization/AToken.sol";
 
-import "./LendingPoolCore.sol";
+import "./PoolCore.sol";
 
 /**
 * @title LendingPoolDataProvider contract

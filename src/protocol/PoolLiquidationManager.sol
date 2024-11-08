@@ -11,8 +11,8 @@ import "../configuration/LendingPoolParametersProvider.sol";
 import "../tokenization/AToken.sol";
 import "../libraries/CoreLibrary.sol";
 import "../libraries/WadRayMath.sol";
-import "./LendingPoolCore.sol";
-import "./LendingPoolDataProvider.sol";
+import "./PoolCore.sol";
+import "./PoolDataProvider.sol";
 import "../interfaces/IPriceOracleGetter.sol";
 
 /**
