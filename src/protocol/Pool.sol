@@ -8,30 +8,30 @@ import "../libraries/openzeppelin-upgradeability/VersionedInitializable.sol";
 import "@fhenixprotocol/contracts/FHE.sol";
 import "@fhenixprotocol/contracts/utils/debug/Console.sol";
 
-import "../configuration/LendingPoolAddressesProvider.sol";
-import "../configuration/LendingPoolParametersProvider.sol";
+import "../configuration/PoolAddressesProvider.sol";
+import "../configuration/PoolParametersProvider.sol";
 import "../tokenization/AToken.sol";
 import "../libraries/CoreLibrary.sol";
 import "../libraries/WadRayMath.sol";
 import "../interfaces/IFeeProvider.sol";
-import "./LendingPoolCore.sol";
-import "./LendingPoolDataProvider.sol";
-import "./LendingPoolLiquidationManager.sol";
+import "./PoolCore.sol";
+import "./PoolDataProvider.sol";
+import "./PoolLiquidationManager.sol";
 import "../libraries/EthAddressLib.sol";
 
 /**
-* @title LendingPool contract
+* @title Pool contract
 * @notice Implements the actions of the LendingPool, and exposes accessory methods to fetch the users and reserve data
  **/
 
-contract LendingPool is ReentrancyGuard, VersionedInitializable { 
+contract Pool is ReentrancyGuard, VersionedInitializable { 
     using WadRayMath for uint256;
     using Address for address;
 
-    LendingPoolAddressesProvider public addressesProvider;
-    LendingPoolCore public core;
-    LendingPoolDataProvider public dataProvider;
-    LendingPoolParametersProvider public parametersProvider;
+    PoolAddressesProvider public addressesProvider;
+    PoolCore public core;
+    PoolDataProvider public dataProvider;
+    PoolParametersProvider public parametersProvider;
     IFeeProvider feeProvider;
 
     /**
@@ -251,20 +251,20 @@ contract LendingPool is ReentrancyGuard, VersionedInitializable {
         return LENDINGPOOL_REVISION;
     }
 
-    constructor(LendingPoolAddressesProvider _addressesProvider) {
+    constructor(PoolAddressesProvider _addressesProvider) {
         initialize(_addressesProvider);
     }
 
     /**
-    * @dev this function is invoked by the proxy contract when the LendingPool contract is added to the
+    * @dev this function is invoked by the proxy contract when the Pool contract is added to the
     * AddressesProvider.
-    * @param _addressesProvider the address of the LendingPoolAddressesProvider registry
+    * @param _addressesProvider the address of the PoolAddressesProvider registry
     **/
-    function initialize(LendingPoolAddressesProvider _addressesProvider) public initializer {
+    function initialize(PoolAddressesProvider _addressesProvider) public initializer {
         addressesProvider = _addressesProvider;
-        core = LendingPoolCore(addressesProvider.getLendingPoolCore());
-        dataProvider = LendingPoolDataProvider(addressesProvider.getLendingPoolDataProvider());
-        parametersProvider = LendingPoolParametersProvider(
+        core = PoolCore(addressesProvider.getLendingPoolCore());
+        dataProvider = PoolDataProvider(addressesProvider.getLendingPoolDataProvider());
+        parametersProvider = PoolParametersProvider(
             addressesProvider.getLendingPoolParametersProvider()
         );
         feeProvider = IFeeProvider(addressesProvider.getFeeProvider());

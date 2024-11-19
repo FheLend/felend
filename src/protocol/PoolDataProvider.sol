@@ -4,7 +4,7 @@ pragma solidity ^0.8.20;
 import "../libraries/openzeppelin-upgradeability/VersionedInitializable.sol";
 
 import "../libraries/CoreLibrary.sol";
-import "../configuration/LendingPoolAddressesProvider.sol";
+import "../configuration/PoolAddressesProvider.sol";
 import "../libraries/WadRayMath.sol";
 import "../interfaces/IPriceOracleGetter.sol";
 import "../interfaces/IFeeProvider.sol";
@@ -13,15 +13,15 @@ import "../tokenization/AToken.sol";
 import "./PoolCore.sol";
 
 /**
-* @title LendingPoolDataProvider contract
+* @title PoolDataProvider contract
 * @notice Implements functions to fetch data from the core, and aggregate them in order to allow computation
 * on the compounded balances and the account balances in ETH
 **/
-contract LendingPoolDataProvider is VersionedInitializable {
+contract PoolDataProvider is VersionedInitializable {
     using WadRayMath for uint256;
 
-    LendingPoolCore public core;
-    LendingPoolAddressesProvider public addressesProvider;
+    PoolCore public core;
+    PoolAddressesProvider public addressesProvider;
 
     /**
     * @dev specifies the health factor threshold at which the user position is liquidated.
@@ -35,13 +35,13 @@ contract LendingPoolDataProvider is VersionedInitializable {
         return DATA_PROVIDER_REVISION;
     }
 
-    constructor(LendingPoolAddressesProvider _addressesProvider) {
+    constructor(PoolAddressesProvider _addressesProvider) {
         initialize(_addressesProvider);
     }
 
-    function initialize(LendingPoolAddressesProvider _addressesProvider) public initializer {
+    function initialize(PoolAddressesProvider _addressesProvider) public initializer {
         addressesProvider = _addressesProvider;
-        core = LendingPoolCore(_addressesProvider.getLendingPoolCore());
+        core = PoolCore(_addressesProvider.getLendingPoolCore());
     }
 
     /**

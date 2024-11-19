@@ -3,15 +3,15 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "../libraries/openzeppelin-upgradeability/InitializableAdminUpgradeabilityProxy.sol";
-import "../interfaces/ILendingPoolAddressesProvider.sol";
+import "../interfaces/IPoolAddressesProvider.sol";
 
 /**
-* @title LendingPoolAddressesProvider contract
+* @title PoolAddressesProvider contract
 * @notice Is the main registry of the protocol. All the different components of the protocol are accessible
 * through the addresses provider.
 **/
 
-contract LendingPoolAddressesProvider is Ownable, ILendingPoolAddressesProvider {
+contract PoolAddressesProvider is Ownable, ILendingPoolAddressesProvider {
 
     mapping(bytes32 => address) private addresses;
 

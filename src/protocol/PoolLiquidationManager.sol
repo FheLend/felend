@@ -6,8 +6,8 @@ import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "../libraries/openzeppelin-upgradeability/VersionedInitializable.sol";
 import "@fhenixprotocol/contracts/FHE.sol";
-import "../configuration/LendingPoolAddressesProvider.sol";
-import "../configuration/LendingPoolParametersProvider.sol";
+import "../configuration/PoolAddressesProvider.sol";
+import "../configuration/PoolParametersProvider.sol";
 import "../tokenization/AToken.sol";
 import "../libraries/CoreLibrary.sol";
 import "../libraries/WadRayMath.sol";
@@ -23,10 +23,10 @@ contract LendingPoolLiquidationManager is ReentrancyGuard, VersionedInitializabl
     using WadRayMath for uint256;
     using Address for address;
 
-    LendingPoolAddressesProvider public addressesProvider;
-    LendingPoolCore core;
-    LendingPoolDataProvider dataProvider;
-    LendingPoolParametersProvider parametersProvider;
+    PoolAddressesProvider public addressesProvider;
+    PoolCore core;
+    PoolDataProvider dataProvider;
+    PoolParametersProvider parametersProvider;
     IFeeProvider feeProvider;
     address ethereumAddress;
 

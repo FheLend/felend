@@ -8,22 +8,22 @@ import "../libraries/openzeppelin-upgradeability/VersionedInitializable.sol";
 import "@fhenixprotocol/contracts/FHE.sol";
 
 import "../libraries/CoreLibrary.sol";
-import "../configuration/LendingPoolAddressesProvider.sol";
-import "../interfaces/ILendingRateOracle.sol";
+import "../configuration/PoolAddressesProvider.sol";
+import "../interfaces/IRateOracle.sol";
 import "../interfaces/IReserveInterestRateStrategy.sol";
 import "../libraries/WadRayMath.sol";
 import "../tokenization/AToken.sol";
 import "../libraries/EthAddressLib.sol";
 
 /**
-* @title LendingPoolCore contract
+* @title PoolCore contract
 * @notice Holds the state of the lending pool and all the funds deposited
 * @dev NOTE: The core does not enforce security checks on the update of the state
 * (eg, updateStateOnBorrow() does not enforce that borrowed is enabled on the reserve).
-* The check that an action can be performed is a duty of the overlying LendingPool contract.
+* The check that an action can be performed is a duty of the overlying Pool contract.
 **/
 
-contract LendingPoolCore is VersionedInitializable {
+contract PoolCore is VersionedInitializable {
     using WadRayMath for uint256;
     using CoreLibrary for CoreLibrary.ReserveData;
     using CoreLibrary for CoreLibrary.UserReserveData;
@@ -50,7 +50,7 @@ contract LendingPoolCore is VersionedInitializable {
 
     address public lendingPoolAddress;
 
-    LendingPoolAddressesProvider public addressesProvider;
+    PoolAddressesProvider public addressesProvider;
 
     /**
     * @dev only lending pools can use functions affected by this modifier
@@ -85,7 +85,7 @@ contract LendingPoolCore is VersionedInitializable {
         return CORE_REVISION;
     }
 
-    constructor(LendingPoolAddressesProvider _addressesProvider) {
+    constructor(PoolAddressesProvider _addressesProvider) {
         initialize(_addressesProvider);
     }
 
@@ -94,7 +94,7 @@ contract LendingPoolCore is VersionedInitializable {
     * @param _addressesProvider the addressesProvider contract
     **/
 
-    function initialize(LendingPoolAddressesProvider _addressesProvider) public initializer {
+    function initialize(PoolAddressesProvider _addressesProvider) public initializer {
         addressesProvider = _addressesProvider;
         refreshConfigInternal();
     }

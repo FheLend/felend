@@ -3,9 +3,9 @@ pragma solidity ^0.8.24;
 
 import "../interfaces/IReserveInterestRateStrategy.sol";
 import "../libraries/WadRayMath.sol";
-import "../configuration/LendingPoolAddressesProvider.sol";
-import "./LendingPoolCore.sol";
-import "../interfaces/ILendingRateOracle.sol";
+import "../configuration/PoolAddressesProvider.sol";
+import "./PoolCore.sol";
+import "../interfaces/IRateOracle.sol";
 
 /**
 * @title DefaultReserveInterestRateStrategy contract
@@ -30,7 +30,7 @@ contract DefaultReserveInterestRateStrategy is IReserveInterestRateStrategy {
 
     uint256 public constant EXCESS_UTILIZATION_RATE = 0.2 * 1e27;
 
-    LendingPoolAddressesProvider public addressesProvider;
+    PoolAddressesProvider public addressesProvider;
 
 
     //base variable borrow rate when Utilization rate = 0. Expressed in ray
@@ -51,7 +51,7 @@ contract DefaultReserveInterestRateStrategy is IReserveInterestRateStrategy {
 
     constructor(
         address _reserve,
-        LendingPoolAddressesProvider _provider,
+        PoolAddressesProvider _provider,
         uint256 _baseVariableBorrowRate,
         uint256 _variableRateSlope1,
         uint256 _variableRateSlope2,

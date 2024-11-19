@@ -2,10 +2,10 @@
 pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "../configuration/LendingPoolAddressesProvider.sol";
-import "../protocol/LendingPool.sol";
-import "../protocol/LendingPoolDataProvider.sol";
-import "../protocol/LendingPoolCore.sol";
+import "../configuration/PoolAddressesProvider.sol";
+import "../protocol/Pool.sol";
+import "../protocol/PoolDataProvider.sol";
+import "../protocol/PoolCore.sol";
 import "../libraries/WadRayMath.sol";
 import "@fhenixprotocol/contracts/FHE.sol";
 
@@ -127,10 +127,10 @@ contract AToken is ERC20 {
     mapping (address => uint256) private redirectedBalances;
     mapping (address => address) private interestRedirectionAllowances;
 
-    LendingPoolAddressesProvider private addressesProvider;
-    LendingPoolCore private core;
-    LendingPool private pool;
-    LendingPoolDataProvider private dataProvider;
+    PoolAddressesProvider private addressesProvider;
+    PoolCore private core;
+    Pool private pool;
+    PoolDataProvider private dataProvider;
 
     modifier onlyLendingPool {
         require(
@@ -146,7 +146,7 @@ contract AToken is ERC20 {
     }
 
     constructor(
-        LendingPoolAddressesProvider _addressesProvider,
+        PoolAddressesProvider _addressesProvider,
         address _underlyingAsset,
         string memory _name,
         string memory _symbol,
@@ -154,9 +154,9 @@ contract AToken is ERC20 {
     ) ERC20(_name, _symbol) {
 
         addressesProvider = _addressesProvider;
-        core = LendingPoolCore(addressesProvider.getLendingPoolCore());
-        pool = LendingPool(addressesProvider.getLendingPool());
-        dataProvider = LendingPoolDataProvider(addressesProvider.getLendingPoolDataProvider());
+        core = PoolCore(addressesProvider.getLendingPoolCore());
+        pool = Pool(addressesProvider.getLendingPool());
+        dataProvider = PoolDataProvider(addressesProvider.getLendingPoolDataProvider());
         underlyingAssetAddress = _underlyingAsset;
         _decimals = _dec;
     }
